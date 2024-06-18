@@ -85,7 +85,7 @@ python aggregate_firms.py
 # 运行分析时，在Windows环境下，可能会报错`UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 14025: illegal multibyte sequence`
 如报错，根据报错提示，去找到所在行数，添加encoding = "utf-8"即可。
 此问题，主要涉及parse_parallel.py（52行，80行和83行）和parse.py（69行，97行和100行）
-
+```
 
 # Measuring Corporate Culture Using Machine Learning
 
