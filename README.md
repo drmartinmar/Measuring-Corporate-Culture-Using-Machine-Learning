@@ -37,8 +37,9 @@ pip install protobuf==3.20.3
 python -m culture.preprocess
 ```
 
-# 在这里，碰到一个问题需要解决。如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的documents.txt的行数不一致，导致错误。"AssertionError: Make sure the input file has the same number of rows as the input ID file"
-运行下方`clean_documents.py`，按照json格式进行输出txt，确保行数一致，不受row内换行影响
+# 在这里，碰到一个问题需要解决。
+如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的documents.txt的行数不一致，导致错误。"AssertionError: Make sure the input file has the same number of rows as the input ID file"
+运行下方`clean_documents.py`，按照json格式进行输出txt，确保行数一致，不受row内换行影响。
 
 ```
 import json
@@ -99,7 +100,8 @@ python score.py
 python aggregate_firms.py
 ```
 
-# 运行分析时，在Windows环境下，可能会报错`UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 14025: illegal multibyte sequence`
+# 运行分析时，在Windows环境下，可能会报错
+报错`UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 14025: illegal multibyte sequence`
 如报错，根据报错提示，去找到所在行数，添加encoding = "utf-8"即可。
 此问题，主要涉及parse_parallel.py（52行，80行和83行）和parse.py（69行，97行和100行）
 
