@@ -22,8 +22,10 @@ unzip stanford-corenlp-full-2018-10-05.zip
 ```
 
 # 修改配置，调用NLP
+```
 修改`global_options.py`，os.environ["CORENLP_HOME"] = "/home/user/stanford-corenlp-full-2018-10-05/"
-Windows电脑修改"/"为"\\",os.environ["CORENLP_HOME"] = c"C:\\user\\stanford-corenlp-full-2018-10-05"
+Windows电脑修改"/"为"\\",os.environ["CORENLP_HOME"] = "C:\\user\\stanford-corenlp-full-2018-10-05"
+```
 
 # 降级protobuf
 ```
