@@ -40,7 +40,7 @@ python -m culture.preprocess
 ```
 
 # 在这里，碰到一个问题需要解决。
-如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的documents.txt的行数不一致，导致错误。`AssertionError: Make sure the input file has the same number of rows as the input ID file`
+如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的`documents.txt`的行数不一致，导致错误。`AssertionError: Make sure the input file has the same number of rows as the input ID file`
 运行下方`clean_documents.py`，按照json格式进行输出txt，确保行数一致，不受row内换行影响。
 
 ```
