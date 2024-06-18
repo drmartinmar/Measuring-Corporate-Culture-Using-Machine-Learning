@@ -1,3 +1,92 @@
+# 本地环境运行
+
+```
+conda create --name stanford_core_nlp python=3.7
+conda activate stanford_core_nlp
+
+# 安装指定包
+pip install -r requirements.txt
+
+# 安装NLP所需java
+sudo apt-get install default-jdk
+
+# 下载Stanford Core NLP
+wget http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
+cd Measuring-Corporate-Culture-Using-Machine-Learning-master
+unzip stanford-corenlp-full-2018-10-05.zip
+
+
+# 修改配置，调用NLP
+修改`global_options.py`，os.environ["CORENLP_HOME"] = "/home/user/stanford-corenlp-full-2018-10-05/"
+Windows电脑修改"/"为"\\",os.environ["CORENLP_HOME"] = "C:\\user\\stanford-corenlp-full-2018-10-05"
+
+# 降级protobuf
+pip install protobuf==3.20.3
+
+# 测试调用NLP
+python -m culture.preprocess
+
+# 在这里，碰到一个问题需要解决。如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的documents.txt的行数不一致，导致错误。"AssertionError: Make sure the input file has the same number of rows as the input ID file"，运行下方`clean_documents.py`，按照json格式进行输出txt，确保行数一致，不受row内换行影响
+
+```
+import json
+from openpyxl import load_workbook
+
+def convert_xlsx_to_txt(input_xlsx_path, output_txt_path):
+    # 加载 Excel 文件
+    workbook = load_workbook(filename=input_xlsx_path, read_only=True)
+    sheet = workbook.active
+
+    # 获取初始行数
+    initial_line_count = sheet.max_row
+    print(f"Initial line count: {initial_line_count}")
+
+    # 打开输出文件进行写入
+    with open(output_txt_path, 'w', encoding='utf-8') as f:
+        for row in sheet.iter_rows(values_only=True):
+            # 将每行的第一个单元格值写入到文本文件
+            item = row[0]
+            if item is not None:
+                # 将每个单元格内容作为 JSON 字符串写入文件，以确保换行符不会影响行数
+                json_item = json.dumps(str(item))
+                f.write(f"{json_item}\n")
+            else:
+                f.write("\n")
+
+    # 验证输出文件的行数
+    with open(output_txt_path, 'r', encoding='utf-8') as f:
+        output_line_count = sum(1 for line in f)
+
+    print(f"Output file line count: {output_line_count}")
+
+    assert initial_line_count == output_line_count, (
+        f"Line count mismatch: Excel file has {initial_line_count} lines, "
+        f"but output file has {output_line_count} lines."
+    )
+
+    print(f"Conversion complete. {initial_line_count} lines written to {output_txt_path}")
+
+if __name__ == "__main__":
+    input_xlsx_path = 'full.xlsx'  # 替换为你的 Excel 文件路径
+    output_txt_path = 'jason_output.txt'  # 替换为输出文本文件路径
+    convert_xlsx_to_txt(input_xlsx_path, output_txt_path)
+```
+# 查看行数是否一致
+wc -l documents.txt
+wc -l document_ids.txt
+
+# 运行分析
+python parse_parallel.py
+python clean_and_train.py
+python create_dict.py
+python score.py
+python aggregate_firms.py
+
+# 运行分析时，在Windows环境下，可能会报错`UnicodeEncodeError: 'gbk' codec can't encode character '\xa0' in position 14025: illegal multibyte sequence`
+如报错，根据报错提示，去找到所在行数，添加encoding = "utf-8"即可。
+此问题，主要涉及parse_parallel.py（52行，80行和83行）和parse.py（69行，97行和100行）
+
+
 # Measuring Corporate Culture Using Machine Learning
 
 ## Introduction
