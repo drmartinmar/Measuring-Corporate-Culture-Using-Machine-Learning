@@ -6,7 +6,9 @@ conda activate stanford_core_nlp
 ```
 
 # 安装指定包
+```
 pip install -r requirements.txt
+```
 
 # 安装NLP所需java
 ```
