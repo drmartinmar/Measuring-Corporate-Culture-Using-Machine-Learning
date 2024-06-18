@@ -1,7 +1,7 @@
 # 本地环境运行
 
 ```
-conda create --name stanford_core_nlp python=3.7
+conda create --name stanford_core_nlp python=3.7 or 3.8
 conda activate stanford_core_nlp
 ```
 
