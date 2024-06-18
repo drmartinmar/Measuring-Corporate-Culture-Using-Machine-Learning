@@ -9,12 +9,12 @@ pip install -r requirements.txt
 
 # 安装NLP所需java
 sudo apt-get install default-jdk
+Windows电脑安装java离线包https://java.com/en/download/manual.jsp，随后配置高级系统设置，修改系统变量，新增JAVA_HOME,路径为C:\Program Files\Java\jre-1.8；编辑Path变量，在变量值的末尾添加 ;C:\Program Files\Java\jre-1.8\bin。重启Terminal，`java`测试能够调用java。
 
 # 下载Stanford Core NLP
 wget http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip
 cd Measuring-Corporate-Culture-Using-Machine-Learning-master
 unzip stanford-corenlp-full-2018-10-05.zip
-
 
 # 修改配置，调用NLP
 修改`global_options.py`，os.environ["CORENLP_HOME"] = "/home/user/stanford-corenlp-full-2018-10-05/"
