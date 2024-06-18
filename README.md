@@ -28,7 +28,6 @@ python -m culture.preprocess
 
 # 在这里，碰到一个问题需要解决。如果文本过长，每一个row里的文本存在换行，可能会导致转换出来的documents.txt的行数不一致，导致错误。"AssertionError: Make sure the input file has the same number of rows as the input ID file"，运行下方`clean_documents.py`，按照json格式进行输出txt，确保行数一致，不受row内换行影响
 
-```
 import json
 from openpyxl import load_workbook
 
@@ -70,7 +69,8 @@ if __name__ == "__main__":
     input_xlsx_path = 'full.xlsx'  # 替换为你的 Excel 文件路径
     output_txt_path = 'jason_output.txt'  # 替换为输出文本文件路径
     convert_xlsx_to_txt(input_xlsx_path, output_txt_path)
-```
+
+
 # 查看行数是否一致
 wc -l documents.txt
 wc -l document_ids.txt
