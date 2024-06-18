@@ -36,6 +36,6 @@ def convert_xlsx_to_txt(input_xlsx_path, output_txt_path):
     print(f"Conversion complete. {initial_line_count} lines written to {output_txt_path}")
 
 if __name__ == "__main__":
-    input_xlsx_path = 'full.xlsx'  # 替换为你的 Excel 文件路径
-    output_txt_path = 'jason_output.txt'  # 替换为输出文本文件路径
+    input_xlsx_path = 'documents.xlsx'  # 替换为你的 Excel 文件路径
+    output_txt_path = 'documents.txt'  # 替换为输出文本文件路径
     convert_xlsx_to_txt(input_xlsx_path, output_txt_path)
